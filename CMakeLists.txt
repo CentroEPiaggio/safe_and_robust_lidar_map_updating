@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(map_change_detection)
+project(safe_and_robust_lidar_map_update)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 #add_compile_options(-std=c++11)
@@ -113,7 +113,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
  INCLUDE_DIRS include
- LIBRARIES map_change_detection grid
+ LIBRARIES safe_and_robust_lidar_map_update grid
  CATKIN_DEPENDS nav_msgs roscpp sensor_msgs std_msgs geometry_msgs tf2 tf2_ros message_runtime
 #  DEPENDS system_lib
 )
@@ -145,43 +145,32 @@ add_library(grid
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(map_change_detection ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 # Declare a C++ executable
 # With catkin_make all packages are built within a single CMake context
 # The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_node src/map_updater_node.cpp)
-add_executable(${PROJECT_NAME}_processer_node src/map_processer_node.cpp)
+add_executable(map_checker_node src/map_updater_node.cpp)
+add_executable(updated_map_processer_node src/map_processer_node.cpp)
 add_executable(odometry_publisher src/odometry_publisher.cpp)
 add_executable(publish_cmd_vel src/publish_cmd_vel.cpp)
 
 
 add_executable(update_localization src/update_localization.cpp src/main_update_localization.cpp)
+
 target_link_libraries(update_localization pcl_visualization ${catkin_LIBRARIES})
 target_link_libraries(publish_cmd_vel ${catkin_LIBRARIES})
 
 
-## Rename C++ executable without prefix
-## The above recommended prefix causes long target names, the following renames the
-## target back to the shorter version for ease of user use
-## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
-# set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
-
-# Add cmake target dependencies of the executable
-# same as for the library above
-add_dependencies(grid ${PROJECT_NAME}_gencpp)
-add_dependencies(${PROJECT_NAME}_node ${PROJECT_NAME}_gencpp)
-add_dependencies(${PROJECT_NAME}_processer_node ${PROJECT_NAME}_gencpp)
-
 # Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}_node
+target_link_libraries(map_checker_node
   map_change_detection
   scan_handler
   grid
   ${catkin_LIBRARIES}
 )
 
-target_link_libraries(${PROJECT_NAME}_processer_node
+target_link_libraries(updated_map_processer_node
   ${catkin_LIBRARIES}
 )
 target_link_libraries(odometry_publisher
@@ -210,7 +199,7 @@ target_link_libraries(odometry_publisher
 
 # Mark libraries for installation
 # See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html
-install(TARGETS ${PROJECT_NAME}
+install(TARGETS map_change_detection
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
@@ -235,7 +224,7 @@ install(DIRECTORY include/${PROJECT_NAME}/
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_map_change_detection.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_safe_and_robust_lidar_map_update.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

@@ -1,4 +1,4 @@
-#include "map_change_detection/grid.hpp"
+#include "safe_and_robust_lidar_map_update/grid.hpp"
 
 #include <math.h>
 #include <functional>
@@ -43,7 +43,7 @@ Grid::Grid(ros::NodeHandle* nodehandle, const nav_msgs::OccupancyGrid& map, bool
 
 	std::string	cells_topic;
 	nh_.getParam("/changed_cells_topic", cells_topic);
-	pub_cells = nh_.advertise<map_change_detection::ChangedCells>(cells_topic, 1, true);
+	pub_cells = nh_.advertise<safe_and_robust_lidar_map_update::ChangedCells>(cells_topic, 1, true);
 	updateMap();
 
 	ROS_INFO("Grid object created!");
@@ -57,7 +57,7 @@ Grid::Grid(ros::NodeHandle* nodehandle, const nav_msgs::OccupancyGrid& map, bool
 
 void Grid::updateMap() {	
 	// nav_msgs::OccupancyGrid map = initial_map;
-	map_change_detection::ChangedCells	changed_msg;
+	safe_and_robust_lidar_map_update::ChangedCells	changed_msg;
 	int64_t	lin_idx;
 	for (auto cells : toFree.getCells()) {
 		for (auto cell : cells) {

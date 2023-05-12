@@ -1,10 +1,10 @@
 #pragma once
 
-#include "map_change_detection/vector2.hpp"
-#include "map_change_detection/rolling_buffer.hpp"
-#include "map_change_detection/efficient_cell_store.hpp"
+#include "safe_and_robust_lidar_map_update/vector2.hpp"
+#include "safe_and_robust_lidar_map_update/rolling_buffer.hpp"
+#include "safe_and_robust_lidar_map_update/efficient_cell_store.hpp"
 
-#include <map_change_detection/ChangedCells.h>
+#include <safe_and_robust_lidar_map_update/ChangedCells.h>
 
 #include <ros/ros.h>
 #include <nav_msgs/OccupancyGrid.h>
@@ -65,7 +65,7 @@ class Grid
 		/** update actual_map attribute and publish the map */
 		void updateMap();
 
-		inline void publishChangedCells(const map_change_detection::ChangedCells& msg) {	pub_cells.publish(msg);	}
+		inline void publishChangedCells(const safe_and_robust_lidar_map_update::ChangedCells& msg) {	pub_cells.publish(msg);	}
 
 		inline const bool isChanged(const Vector2<int32_t>& cell) {
 			return (countChangedFlags(cell) >= change_threshold  || ((countChangedFlags(cell) + countChangedNeighbours(cell)) >= change_threshold));

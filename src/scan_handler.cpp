@@ -1,4 +1,4 @@
-#include "map_change_detection/scan_handler.hpp"
+#include "safe_and_robust_lidar_map_update/scan_handler.hpp"
 
 #include <tf2/utils.h>
 #include <geometry_msgs/TransformStamped.h>

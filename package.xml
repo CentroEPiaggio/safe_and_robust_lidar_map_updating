@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>map_change_detection</name>
+  <name>safe_and_robust_lidar_map_update</name>
   <version>0.0.0</version>
-  <description>The map_change_detection package</description>
+  <description>The safe_and_robust_lidar_map_update package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="enrico@todo.todo">enrico</maintainer>
+  <maintainer email="elisa@todo.todo">elisa</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/map_change_detection</url> -->
+  <!-- <url type="website">http://wiki.ros.org/safe_and_robust_lidar_map_update</url> -->
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->

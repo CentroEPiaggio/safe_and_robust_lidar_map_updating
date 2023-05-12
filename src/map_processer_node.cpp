@@ -1,4 +1,4 @@
-#include "map_change_detection/map_processer.hpp"
+#include "safe_and_robust_lidar_map_update/map_processer.hpp"
 
 MapProcesser::MapProcesser(ros::NodeHandle* nodehandle) :	nh_(*nodehandle) {
 	std::string map_topic, map_processed_topic, cells_topic;
@@ -21,7 +21,7 @@ MapProcesser::MapProcesser(ros::NodeHandle* nodehandle) :	nh_(*nodehandle) {
 	}
 }
 
-void MapProcesser::subscriberCallback(const map_change_detection::ChangedCells& msg) {
+void MapProcesser::subscriberCallback(const safe_and_robust_lidar_map_update::ChangedCells& msg) {
 	nav_msgs::OccupancyGrid actual_map = initial_map;
 
 	for(auto idx : msg.toOcc)

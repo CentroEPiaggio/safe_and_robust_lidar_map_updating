@@ -1,6 +1,6 @@
 #pragma once
 
-#include "map_change_detection/vector2.hpp"
+#include "safe_and_robust_lidar_map_update/vector2.hpp"
 #include <vector>
 
 class SortedCellContainer

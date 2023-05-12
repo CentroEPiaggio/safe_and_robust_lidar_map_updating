@@ -1,7 +1,7 @@
-#include "map_change_detection/map_change_detection.hpp"
-#include "map_change_detection/efficient_cell_store.hpp"
+#include "safe_and_robust_lidar_map_update/map_change_detection.hpp"
+#include "safe_and_robust_lidar_map_update/efficient_cell_store.hpp"
 
-#include <map_change_detection/ChangedCells.h>
+#include <safe_and_robust_lidar_map_update/ChangedCells.h>
 
 #include <tf2/LinearMath/Quaternion.h>
 #include <numeric>
@@ -116,9 +116,9 @@ MapChangeDetection::MapChangeDetection(ros::NodeHandle* nodehandle) :	nh_(*nodeh
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool MapChangeDetection::serviceCallback(map_change_detection::UpdateMap::Request& request, map_change_detection::UpdateMap::Response& response) {
+bool MapChangeDetection::serviceCallback(safe_and_robust_lidar_map_update::UpdateMap::Request& request, safe_and_robust_lidar_map_update::UpdateMap::Response& response) {
 	ROS_INFO("Service called! Updating the map...");
-	map_change_detection::ChangedCells	msg;
+	safe_and_robust_lidar_map_update::ChangedCells	msg;
 	for(int i = 0; i < grid->getWidth(); i++) {
 		for(int j = 0; j < grid->getHeight(); j++) {
 			if(grid->isChanged(i, j)) {

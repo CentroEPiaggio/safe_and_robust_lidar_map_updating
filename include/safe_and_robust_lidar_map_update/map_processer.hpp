@@ -1,6 +1,6 @@
 #include "grid.hpp"
 
-#include <map_change_detection/ChangedCells.h>
+#include <safe_and_robust_lidar_map_update/ChangedCells.h>
 
 class MapProcesser
 {
@@ -15,5 +15,5 @@ class MapProcesser
 
 		nav_msgs::OccupancyGrid initial_map;
 
-		void subscriberCallback(const map_change_detection::ChangedCells& msg);
+		void subscriberCallback(const safe_and_robust_lidar_map_update::ChangedCells& msg);
 };

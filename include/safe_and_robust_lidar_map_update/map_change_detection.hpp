@@ -1,9 +1,9 @@
 #pragma once
 
-#include "map_change_detection/grid.hpp"
-#include "map_change_detection/scan_handler.hpp"
+#include "safe_and_robust_lidar_map_update/grid.hpp"
+#include "safe_and_robust_lidar_map_update/scan_handler.hpp"
 
-#include <map_change_detection/UpdateMap.h>
+#include <safe_and_robust_lidar_map_update/UpdateMap.h>
 
 #include <visualization_msgs/Marker.h>
 #include <nav_msgs/Odometry.h>
@@ -41,7 +41,7 @@ class MapChangeDetection
 		ros::ServiceServer update_map_service;
 		ros::ServiceClient update_localization,stop_robot;
 
-		bool serviceCallback(map_change_detection::UpdateMap::Request& request, map_change_detection::UpdateMap::Response& response);
+		bool serviceCallback(safe_and_robust_lidar_map_update::UpdateMap::Request& request, safe_and_robust_lidar_map_update::UpdateMap::Response& response);
 
 		// Anomalous beams detection
 		double	m_pairing, q_pairing, dist_saturation;	// parameters for computing the pairing distance threshold as a function of the measured range

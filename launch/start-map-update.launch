@@ -5,25 +5,25 @@
 <arg name="debug_visualization" default="false"/>
 
 	
-<rosparam file="$(find map_change_detection)/param/parameters.yaml" />
+<rosparam file="$(find safe_and_robust_lidar_map_update)/parameters.yaml" />
 
 <!--map update -->
 
-<node pkg="map_change_detection" name="map_updater" type="map_change_detection_node" output="screen">
+<node pkg="safe_and_robust_lidar_map_update" type="map_checker_node" name="map_updater" output="screen">
     <param name="visualize_on_rviz" value="$(arg gui)"/>
     <param name="visualize_debug_stuff" value="$(arg debug_visualization)"/>
 </node>
 
-<node pkg="map_change_detection" type="map_change_detection_processer_node" name="updated_map_processer" output="screen"/>-
+<node pkg="safe_and_robust_lidar_map_update" type="updated_map_processer_node" name="updated_map_processer" output="screen"/>-
 
 <!--pose updater-->
-<node pkg="map_change_detection" type="update_localization" name="update_localization" output="screen">
+<node pkg="safe_and_robust_lidar_map_update" type="update_localization" name="update_localization" output="screen">
 
 </node>
 
 <!--velocity control node--> <!--take in input the cmd vel velocity and act on start and stop depending on pose updater module-->
 <!--subscribe to teleop_cmd_vel and publish on /cmd_vel topic-->
-<node pkg="map_change_detection" type="publish_cmd_vel" name="publish_cmd_vel" output="screen"/>
+<node pkg="safe_and_robust_lidar_map_update" type="publish_cmd_vel" name="publish_cmd_vel" output="screen"/>
 
 
 </launch>
